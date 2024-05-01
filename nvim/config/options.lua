@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 vim.opt.guicursor = ""
 
 vim.scriptencoding = "utf-8"
@@ -35,3 +33,9 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
+
+vim.opt.swapfile = false
+
+-- LSP Server to use for Python.
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+-- vim.g.lazyvim_python_lsp = "pyright"
