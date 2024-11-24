@@ -20,8 +20,6 @@ IRIS='\[\033[38;5;177m\]'      # Iris lavender (#c4a7e7)
 # Prompt structure
 PS1="${HIGHLIGHT}\w${RESET} ${PRIMARY}──●◎●── ${RESET}"
 
-export TMUX_CONF="$HOME/.config/tmux/tmux.conf"
-
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 
