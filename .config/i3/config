@@ -313,7 +313,7 @@ set $ws2 "2:"
 set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:"
-set $ws6 "6"
+set $ws6 "6:♪"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -334,6 +334,7 @@ assign [class="(?i)firefox"] $ws2
 assign [class="Thunar"] $ws3
 assign [class="thunderbird"] $ws4
 assign [class="vesktop"] $ws5
+assign [class="Spotify"] $ws6
 
 # automatic set focus new window if it opens on another workspace than the current:
 for_window [class=kitty] focus
@@ -404,7 +405,7 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
 # exec --no-startup-id sleep 2 && nitrogen --restore
-exec --no-startup-id sleep 1 && feh --bg-fill /home/ian/Downloads/this.jpg
+exec --no-startup-id sleep 1 && feh --bg-fill /home/ian/Downloads/maybe.png
 
 # set powersavings for display:
 exec --no-startup-id xset s 480 dpms 600 600 600
@@ -438,8 +439,9 @@ exec --no-startup-id /usr/bin/dunst
 
 # Autostart apps as you like
 exec --no-startup-id sleep 2 && kitty
-exec --no-startup-id sleep 7 && firefox https://github.com/iluvcereals
-exec --no-startup-id sleep 7 && vesktop
+exec --no-startup-id sleep 3 && firefox https://github.com/iluvcereals
+exec --no-startup-id sleep 4 && vesktop
+exec --no-startup-id sleep 3 && Spotify
 #exec --no-startup-id sleep 3 && thunar
 
 ###############
@@ -513,7 +515,7 @@ set $activeColor #1F122D
 client.focused		    	$barColor	$barColor	$grey		$mediumgrey	$mediumgrey
 client.unfocused	    	$barColor	$barColor	$darkgrey		$darkgrey	$darkgrey
 client.focused_inactive		$darkblue	$darkblue	$grey		$black		$black
-client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
+client.urgent		    	$barColor	$barColor	$white		$yellowbrown	$yellowbrown
 
 ############################################
 # bar settings (input comes from i3blocks) #
@@ -522,7 +524,9 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 # Start i3bar to display a workspace bar
 # (plus the system information i3status finds out, if available)
 bar {
-		font pango: Noto Sans Regular 10
+        bindsym button4 nop
+        bindsym button5 nop
+        font pango: Noto Sans Regular 10
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	    	position bottom
 #	    	i3bar_command i3bar --transparency
@@ -545,7 +549,7 @@ strip_workspace_numbers yes
 		focused_workspace	$activeColor	   	$activeColor		$grey	$purple
 		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
 		inactive_workspace	$barColor   		$barColor	$darkgrey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
+		urgent_workspace	$barColor	    	$barColor	$darkgrey		$purple
 	}
 }
 
