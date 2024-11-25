@@ -39,7 +39,7 @@ alias bashconf='vim ~/.bashrc'
 alias nfconf='cd $HOME/.config/neofetch/ && vim config.conf'
 
 # Alias to change to tmux config directory and open the tmux config
-alias tmuxconf='cd $HOME/.config/tmux && vim tmux.conf'
+alias tmuxconf='vim $HOME/.tmux.conf'
 
 # Alias to change to vim config directory and open vim config directory
 alias vimconf='cd $HOME/.config/nvim && vim .'
@@ -48,7 +48,7 @@ alias vimconf='cd $HOME/.config/nvim && vim .'
 alias i3conf='cd $HOME/.config/i3 && vim config'
 
 # Alias to change to i3 config directory and open i3block config
-alias i3bconf='cd $HOME/.config/i3 && vim i3block'
+alias i3bconf='cd $HOME/.config/i3 && vim i3blocks.conf'
 
 # Alias to change to kitty config directory and open kitty config file
 alias kittyconf='cd $HOME/.config/kitty && vim kitty.conf'
