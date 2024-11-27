@@ -60,7 +60,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
 
-export PATH="$PATH:$HOME/.dotnet/tools"
+export PATH="$HOME/go/bin:$HOME/.dotnet/tools:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
