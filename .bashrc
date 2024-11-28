@@ -27,7 +27,9 @@ eval "$(fzf --bash)"
 alias sbash='source ~/.bashrc'
 
 # Alias for fzf to open with vim when selected
-alias fz='fzf -m --preview="bat --color=always {}" --bind "enter:become(nvim {+})"'
+# alias fz='fzf -m --preview="bat --color=always {}" --bind "enter:become(nvim {+})"'
+
+alias f="cd ~ && dir=\$(find ~/Code -type d \( -name node_modules -o -name .git \) -prune -o -name '*' -type d -print | fzf) && [ -n \"\$dir\" ] && cd \"\$dir\" && vim"
 
 # Alias to open neovim with vim
 alias vim='nvim'
