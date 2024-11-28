@@ -439,7 +439,7 @@ exec --no-startup-id /usr/bin/dunst
 
 # Autostart apps as you like
 exec --no-startup-id sleep 2 && kitty
-exec --no-startup-id sleep 4 && firefox https://github.com/iluvcereals
+exec --no-startup-id sleep 5 && firefox https://github.com/iluvcereals
 exec --no-startup-id sleep 7 && vesktop
 exec --no-startup-id sleep 10 && bruno
 exec --no-startup-id sleep 12 && spotify-launcher
