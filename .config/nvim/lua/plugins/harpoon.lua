@@ -15,7 +15,6 @@ return {
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end, { desc = "Harpoon: Show mark list" })
 
-      -- Only gigachads use Dvorak (TODO: Try Dvorak or Colemak)
       vim.keymap.set("n", "<leader>1", function()
         harpoon:list():select(1)
       end, { desc = "Harpoon: Jump to mark 1" })
