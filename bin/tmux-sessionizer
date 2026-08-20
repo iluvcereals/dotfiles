@@ -2,44 +2,50 @@
 #!/usr/bin/env bash
 
 # 1. Choose directory: from command argument or via interactive fzf search
-    if [[ $# -eq 1 ]]; then
-        selected=$1
-    else
-        # 1. Search relative to ~/Code (depth 4, ignoring hidden folders like .git)
-        selected_rel=$(cd ~/Code && find . -mindepth 1 -maxdepth 4 -type d -not -path '*/.*' 2>/dev/null | sed 's|^\./||' | fzf)
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Search ~/Code: 'Learning' gets depth 4, other folders get depth 2 (no node_modules)
+    selected_rel=$(
+        cd ~/Code && {
+            # Shows Bruno, School, Learning, and 1 level inside Bruno & School
+            find . -mindepth 1 -maxdepth 2 -type d -not -path './Learning/*' -not -path '*/.*' -not -path '*/node_modules*' 2>/dev/null
+            # Depth 4 for Learning (limits Learning/angular to depth 2, excludes node_modules and hidden files)
+            find Learning -mindepth 1 -maxdepth 4 -type d -not -path 'Learning/angular/*/*' -not -path '*/.*' -not -path '*/node_modules*' 2>/dev/null
+        } | sed 's|^\./||' | fzf
+    )
 
-        if [[ -z $selected_rel ]]; then
-            exit 0
-        fi
-
-        selected="$HOME/Code/$selected_rel"
+    if [[ -z $selected_rel ]]; then
+        exit 0
     fi
+
+    selected="$HOME/Code/$selected_rel"
+fi
 
 # Exit if user cancelled selection (pressed Esc in fzf)
-    if [[ -z $selected ]]; then
+if [[ -z $selected ]]; then
     exit 0
-    fi
+fi
 
 # 2. Format session name (e.g. replaces '.' with '_')
-    selected_name=$(basename "$selected" | tr . _)
+selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 # 3. If tmux server is not running, start it with this new session
-    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -n "main" -c "$selected"
-    nvim
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -ds "$selected_name" -n "main" -c "$selected" "nvim; exec $SHELL"
+    tmux attach-session -t "$selected_name"
     exit 0
-    fi
+fi
 
 # 4. If session doesn't exist yet, create it in the background (-d)
-    if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -n "main" -c "$selected"
-    nvim
-    fi
+if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    tmux new-session -ds "$selected_name" -n "main" -c "$selected" "nvim; exec $SHELL"
+fi
 
 # 5. Switch to session (attach from shell, or switch client inside tmux)
-    if [[ -z $TMUX ]]; then
+if [[ -z $TMUX ]]; then
     tmux attach-session -t "$selected_name"
-    else
+else
     tmux switch-client -t "$selected_name"
-    fi
+fi
