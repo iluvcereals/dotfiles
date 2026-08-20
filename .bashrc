@@ -38,7 +38,7 @@ fzd() {
         --exclude 'dsa/*' \
         --base-directory ~/Code/Learning | fzf)
     if [ -n "$dir" ]; then
-        cd "$HOME/Code/Learning/$dir" && vim
+        cd "$HOME/Code/Learning/$dir" && nvim
     fi
 }
 

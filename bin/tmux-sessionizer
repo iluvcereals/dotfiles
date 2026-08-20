@@ -27,12 +27,14 @@ tmux_running=$(pgrep tmux)
 # 3. If tmux server is not running, start it with this new session
     if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
     tmux new-session -s "$selected_name" -n "main" -c "$selected"
+    nvim
     exit 0
     fi
 
 # 4. If session doesn't exist yet, create it in the background (-d)
     if ! tmux has-session -t="$selected_name" 2> /dev/null; then
     tmux new-session -ds "$selected_name" -n "main" -c "$selected"
+    nvim
     fi
 
 # 5. Switch to session (attach from shell, or switch client inside tmux)
