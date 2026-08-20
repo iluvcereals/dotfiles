@@ -1,0 +1,43 @@
+
+#!/usr/bin/env bash
+
+# 1. Choose directory: from command argument or via interactive fzf search
+    if [[ $# -eq 1 ]]; then
+        selected=$1
+    else
+        # 1. Search relative to ~/Code (depth 4, ignoring hidden folders like .git)
+        selected_rel=$(cd ~/Code && find . -mindepth 1 -maxdepth 4 -type d -not -path '*/.*' 2>/dev/null | sed 's|^\./||' | fzf)
+
+        if [[ -z $selected_rel ]]; then
+            exit 0
+        fi
+
+        selected="$HOME/Code/$selected_rel"
+    fi
+
+# Exit if user cancelled selection (pressed Esc in fzf)
+    if [[ -z $selected ]]; then
+    exit 0
+    fi
+
+# 2. Format session name (e.g. replaces '.' with '_')
+    selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# 3. If tmux server is not running, start it with this new session
+    if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s "$selected_name" -n "main" -c "$selected"
+    exit 0
+    fi
+
+# 4. If session doesn't exist yet, create it in the background (-d)
+    if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+    tmux new-session -ds "$selected_name" -n "main" -c "$selected"
+    fi
+
+# 5. Switch to session (attach from shell, or switch client inside tmux)
+    if [[ -z $TMUX ]]; then
+    tmux attach-session -t "$selected_name"
+    else
+    tmux switch-client -t "$selected_name"
+    fi

@@ -29,7 +29,18 @@ alias sbash='source ~/.bashrc'
 # Alias for fzf to open with vim when selected
 # alias fz='fzf -m --preview="bat --color=always {}" --bind "enter:become(nvim {+})"'
 
-alias f="cd ~ && dir=\$(find ~/Code -type d \( -name node_modules -o -name .git \) -prune -o -name '*' -type d -print | fzf) && [ -n \"\$dir\" ] && cd \"\$dir\" && vim"
+fzd() {
+    local dir
+    dir=$(fd --type d \
+        --exclude node_modules \
+        --exclude .git \
+        --exclude angular \
+        --exclude 'dsa/*' \
+        --base-directory ~/Code/Learning | fzf)
+    if [ -n "$dir" ]; then
+        cd "$HOME/Code/Learning/$dir" && vim
+    fi
+}
 
 # Alias to open neovim with vim
 alias vim='nvim'
@@ -62,12 +73,19 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
 
+bind -x '"\C-f": tmux-sessionizer'
+
 export PATH="$HOME/go/bin:$HOME/.dotnet/tools:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+. "$HOME/.cargo/env"
+
+# Added by Antigravity CLI installer
+export PATH="/home/ian/.local/bin:$PATH"
