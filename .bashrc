@@ -55,7 +55,7 @@ alias nfconf='cd $HOME/.config/neofetch/ && vim config.conf'
 alias tmuxconf='vim $HOME/.tmux.conf'
 
 # Alias to change to vim config directory and open vim config directory
-alias vimconf='cd $HOME/.config/nvim && vim .'
+alias vimconf='cd $HOME/.config/nvim && vim'
 
 # Alias to change to i3 config directory and open i3 config
 alias i3conf='cd $HOME/.config/i3 && vim config'
