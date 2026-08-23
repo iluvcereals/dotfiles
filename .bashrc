@@ -14,19 +14,21 @@ PRIMARY='\[\033[38;5;210m\]'   # Rose pink (#eb6f92)
 LOVE='\[\033[38;5;176m\]'      # Rose pink alternative (#ea9a97)
 GOLD='\[\033[38;5;214m\]'      # Gold (#f6c177)
 PINE='\[\033[38;5;73m\]'       # Deep green-blue (#3e8fb0)
-FOAM='\[\033[38;5;152m\]'      # Soft blue (#9ccfd8)
-IRIS='\[\033[38;5;177m\]'      # Iris lavender (#c4a7e7)
+FOAM='\[\033[38;5;110m\]'      # Muted pastel blue (#89b4fa / soft slate blue)
+IRIS='\[\033[38;2;203;166;247m\]' # Rich mauve purple (#cba6f7)
 
-# Prompt structure
 git_branch() {
     local branch
     branch=$(git branch --show-current 2>/dev/null)
     if [ -n "$branch" ]; then
-        printf ' \001\033[38;5;252m\002git:(\001\033[1;38;5;51m\002%s\001\033[0;38;5;252m\002)\001\033[0m\002' "$branch"
+        # git:( ) = Warm Pastel Yellow (#f9e2af)
+        # branch  = Dark Pastel Red (#e06c75)
+        printf ' \001\033[38;2;249;226;175m\002git:(\001\033[38;2;224;108;117m\002%s\001\033[38;2;249;226;175m\002)\001\033[0m\002' "$branch"
     fi
 }
 
-PS1="${HIGHLIGHT}\w${RESET}\$(git_branch) ${PRIMARY}──●◎●── ${RESET}"
+# PS1="${HIGHLIGHT}\w${RESET}\$(git_branch) ${PRIMARY}──●◎●── ${RESET}"
+PS1="${IRIS}\W${RESET}\$(git_branch) "
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
