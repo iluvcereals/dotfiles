@@ -18,7 +18,15 @@ FOAM='\[\033[38;5;152m\]'      # Soft blue (#9ccfd8)
 IRIS='\[\033[38;5;177m\]'      # Iris lavender (#c4a7e7)
 
 # Prompt structure
-PS1="${HIGHLIGHT}\w${RESET} ${PRIMARY}──●◎●── ${RESET}"
+git_branch() {
+    local branch
+    branch=$(git branch --show-current 2>/dev/null)
+    if [ -n "$branch" ]; then
+        printf ' \001\033[38;5;252m\002git:(\001\033[1;38;5;51m\002%s\001\033[0;38;5;252m\002)\001\033[0m\002' "$branch"
+    fi
+}
+
+PS1="${HIGHLIGHT}\w${RESET}\$(git_branch) ${PRIMARY}──●◎●── ${RESET}"
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
