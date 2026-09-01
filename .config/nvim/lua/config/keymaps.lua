@@ -13,3 +13,7 @@ keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
 keymap.set("x", "<leader>p", '"_dP')
+
+-- I keep misclicking these when I don't want to switch buffers
+keymap.del("n", "<S-h>")
+keymap.del("n", "<S-l>")
