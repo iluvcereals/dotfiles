@@ -97,3 +97,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # Added by Antigravity CLI installer
 export PATH="/home/ian/.local/bin:$PATH"
+
+export PATH=$PATH:/home/ian/.spicetify
