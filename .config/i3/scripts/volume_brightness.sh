@@ -44,9 +44,10 @@ function get_brightness_icon {
 
 # Displays a volume notification using dunstify
 function show_volume_notif {
-    volume=$(get_mute)
+    volume=$(get_volume)
     get_volume_icon
-    dunstify -i audio-volume-muted-blocking -t 1000 -r 2593 -u normal "$volume_icon $volume%" -h int:value:$volume -h string:hlcolor:$bar_color
+    # dunstify -i audio-volume-muted-blocking -t 1000 -r 2593 -u normal "$volume_icon $volume%" -h int:value:$volume -h string:hlcolor:$bar_color
+    pkill -RTMIN+1 i3blocks
 }
 
 # Displays a brightness notification using dunstify
