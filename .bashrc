@@ -7,14 +7,14 @@
 
 # Reset and color definitions for Rose Pine
 RESET='\[\033[0m\]'
-TEXT='\[\033[38;5;252m\]'      # Light grayish white (#e0def4)
-SUBTLE='\[\033[38;5;243m\]'    # Muted lavender-gray (#6e6a86)
-HIGHLIGHT='\[\033[38;5;177m\]' # Soft lavender (#c4a7e7)
-PRIMARY='\[\033[38;5;210m\]'   # Rose pink (#eb6f92)
-LOVE='\[\033[38;5;176m\]'      # Rose pink alternative (#ea9a97)
-GOLD='\[\033[38;5;214m\]'      # Gold (#f6c177)
-PINE='\[\033[38;5;73m\]'       # Deep green-blue (#3e8fb0)
-FOAM='\[\033[38;5;110m\]'      # Muted pastel blue (#89b4fa / soft slate blue)
+TEXT='\[\033[38;5;252m\]'         # Light grayish white (#e0def4)
+SUBTLE='\[\033[38;5;243m\]'       # Muted lavender-gray (#6e6a86)
+HIGHLIGHT='\[\033[38;5;177m\]'    # Soft lavender (#c4a7e7)
+PRIMARY='\[\033[38;5;210m\]'      # Rose pink (#eb6f92)
+LOVE='\[\033[38;5;176m\]'         # Rose pink alternative (#ea9a97)
+GOLD='\[\033[38;5;214m\]'         # Gold (#f6c177)
+PINE='\[\033[38;5;73m\]'          # Deep green-blue (#3e8fb0)
+FOAM='\[\033[38;5;110m\]'         # Muted pastel blue (#89b4fa / soft slate blue)
 IRIS='\[\033[38;2;203;166;247m\]' # Rich mauve purple (#cba6f7)
 
 git_branch() {
@@ -99,3 +99,6 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/home/ian/.local/bin:$PATH"
 
 export PATH=$PATH:/home/ian/.spicetify
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
