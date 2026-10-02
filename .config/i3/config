@@ -625,3 +625,7 @@ bindsym $mod+t exec --no-startup-id rofi -show window \
 
 # Windows + Shift + S to select an area and copy to clipboard
 bindsym $mod+Shift+s exec --no-startup-id "maim -s | xclip -selection clipboard -t image/png"
+
+
+# Hide mouse when idle, doesn't show with keyboard actions
+exec --no-startup-id unclutter --timeout 3
